@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="892a6fc0-44a2-4626-a10b-306c6948448e" name="Changes" comment="Primeiro commit - Criação do projeto">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" afterDir="false" />
+    <list default="true" id="892a6fc0-44a2-4626-a10b-306c6948448e" name="Changes" comment="Criação primeiras classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -62,7 +63,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665621580097</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Criação primeiras classes">
+      <created>1665698811003</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1665698811003</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -78,6 +86,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primeiro commit - Criação do projeto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primeiro commit - Criação do projeto" />
+    <MESSAGE value="Criação primeiras classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criação primeiras classes" />
   </component>
 </project>
