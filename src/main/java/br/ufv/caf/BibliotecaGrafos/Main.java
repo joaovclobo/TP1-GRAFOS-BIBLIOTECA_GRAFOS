@@ -20,6 +20,24 @@ package br.ufv.caf.BibliotecaGrafos;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        Grafo grafo = new Grafo();
+        grafo.addVertices(5);
+
+        grafo.addAresta(1, 2, 1.2);
+        grafo.addAresta(2, 5, 2.3);
+        grafo.addAresta(3, 5, -8.4);
+        grafo.addAresta(3, 4, 0.3);
+        grafo.addAresta(4, 5, 4.6);
+        grafo.addAresta(1, 5, 0.1);
+
+        grafo.printGrafo();
+
+        System.out.println("\n");
+        System.out.println("Ordem: " + grafo.getOrdem());
+        System.out.println("Tamanho: " + grafo.getTamanho());
+        System.out.println("Vizinhos: " + grafo.getVizinhos(5));
+        System.out.println("Grau: " + grafo.getGrau(2));
+        System.out.println("Sequencia de graus: " + grafo.getSequenciaGraus());
     }
 }

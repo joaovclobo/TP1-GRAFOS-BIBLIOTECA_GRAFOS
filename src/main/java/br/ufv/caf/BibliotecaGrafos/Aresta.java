@@ -19,13 +19,18 @@ Alunos responsáveis:
 package br.ufv.caf.BibliotecaGrafos;
 
 public class Aresta {
-    float peso;
+    double peso;
     int indVertice1;
     int indVertice2;
     
-    protected Aresta(int indVertice1, int indVertice2, float peso){
+    protected Aresta(int indVertice1, int indVertice2, double peso){
         this.peso = peso;
         this.indVertice1 = indVertice1;
         this.indVertice2 = indVertice2;
+    }
+
+    @Override
+    public String toString() {
+        return "Aresta: " + this.indVertice1 + "," + this.indVertice2 + " - Peso: " + this.peso;
     }
 }

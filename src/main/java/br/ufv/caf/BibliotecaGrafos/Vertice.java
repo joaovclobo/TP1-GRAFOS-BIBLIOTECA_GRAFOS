@@ -20,7 +20,6 @@ package br.ufv.caf.BibliotecaGrafos;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Vertice {
 
@@ -29,7 +28,8 @@ public class Vertice {
     private int grau;
 
     protected Vertice(int indice) {
-        this.vizinhos = null;
+        this.indice = indice;
+        this.vizinhos = new ArrayList<>();
         this.grau = 0;
     }
 
@@ -59,5 +59,10 @@ public class Vertice {
         Collections.sort(indVizinhos);
 
         return indVizinhos;
+    }
+
+    @Override
+    public String toString(){
+        return "Vertice: " + this.indice + " - Grau: " + this.grau + " - Vizinhos: " +  this.getVizinhosVertice();
     }
 }

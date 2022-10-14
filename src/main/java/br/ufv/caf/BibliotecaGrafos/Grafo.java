@@ -30,7 +30,7 @@ public class Grafo {
         vertices = new ArrayList<>();
     }
 
-    /*------------ Funções da biblioteca (Disponíveis para o usuário) ------------*/
+    /*------------ Funções da biblioteca ------------*/
 
     public int getOrdem(){
         return vertices.size();
@@ -41,12 +41,11 @@ public class Grafo {
     }
 
     public ArrayList<Integer> getVizinhos(int indVetice) {
-        return vertices.get(indVetice).getVizinhosVertice();
+        return vertices.get(indVetice - 1).getVizinhosVertice();
     }
 
-
-    public int getGrau(int indVertice){
-        return vertices.get(indVertice).getGrau();
+    public int getGrau(int indVetice){
+        return vertices.get(indVetice).getGrau();
     }
 
     public ArrayList<Integer> getSequenciaGraus(){
@@ -61,12 +60,12 @@ public class Grafo {
         return sequenciaGraus;
     }
 
-    /*------------ Funções da auxiliares (Não disponíveis para o usuário) ------------*/
+    /*------------ Funções para iniciar e mostrar o grafo ------------*/
 
-    private void addAresta(int indVertice1, int indVertice2, float peso){
+    public void addAresta(int indVertice1, int indVertice2, double peso){
 
-        Vertice vertice1 = vertices.get(indVertice1);
-        Vertice vertice2 = vertices.get(indVertice1);
+        Vertice vertice1 = vertices.get(indVertice1 - 1);
+        Vertice vertice2 = vertices.get(indVertice2 - 1);
 
         vertice1.aumentaGrau();
         vertice2.aumentaGrau();
@@ -79,12 +78,27 @@ public class Grafo {
     }
 
     private void addVertice(int indice){
-        this.vertices.add(new Vertice(indice));
+        Vertice vertice = new Vertice(indice);
+        this.vertices.add(vertice);
     }
 
-    private void addVertices(int numeroVertices){
+    public void addVertices(int numeroVertices){
         for (int i = 0; i < numeroVertices; i++) {
-            addVertice(i);
+            addVertice(i + 1);
         }
     }
+
+    void printGrafo(){
+        System.out.println("\n-------- Vertices --------\n");
+
+        for (Vertice vertice: vertices) {
+            System.out.println(vertice);;
+        }
+        System.out.println("\n-------- Arestas --------\n");
+
+        for (Aresta aresta: arestas) {
+            System.out.println(aresta);
+        }
+    }
+
 }
