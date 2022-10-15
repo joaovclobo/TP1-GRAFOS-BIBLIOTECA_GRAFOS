@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="892a6fc0-44a2-4626-a10b-306c6948448e" name="Changes" comment="Fim da criação das funções basicas">
+    <list default="true" id="892a6fc0-44a2-4626-a10b-306c6948448e" name="Changes" comment="Conclusão das funçẽos do grafo (parte 1) testadas">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ufv/caf/br/ConversorJson/Json2txt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ufv/caf/br/ConversorJson/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ufv/caf/br/ConversorJson/Txt2Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConversaoJson/ConversorJson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ConversaoJson/ConversorJson/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConversaoJson/ConversorJson/src/main/java/ufv/caf/br/ConversorJson/Json2txt.java" beforeDir="false" afterPath="$PROJECT_DIR$/ConversaoJson/ConversorJson/src/main/java/ufv/caf/br/ConversorJson/Json2txt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConversaoJson/ConversorJson/src/main/java/ufv/caf/br/ConversorJson/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ConversaoJson/ConversorJson/src/main/java/ufv/caf/br/ConversorJson/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConversaoJson/ConversorJson/src/main/java/ufv/caf/br/ConversorJson/Txt2Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/ConversaoJson/ConversorJson/src/main/java/ufv/caf/br/ConversorJson/Txt2Json.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +31,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="ConversaoJson" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -41,16 +58,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/joao/Documents/UFV/CCF 331 - GRAFOS/TP1/GraphsLib/BibliotecaGrafos/BibliotecaGrafos/src/main/java/ufv/caf/br/ConversorJson",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="br.ufv.caf.BibliotecaGrafos.Main" />
+    <configuration name="TesteClasses" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.ufv.caf.BibliotecaGrafos.TesteClasses" />
       <module name="BibliotecaGrafos" />
       <extension name="coverage">
         <pattern>
@@ -64,7 +82,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.TesteClasses" />
       </list>
     </recent_temporary>
   </component>
@@ -105,17 +123,54 @@
       <option name="project" value="LOCAL" />
       <updated>1665704581875</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Conclusão das funçẽos do grafo (parte 1) testadas">
+      <created>1665764704121</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1665764704121</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="024eed6d-ba7e-4bfc-90c8-52e4970dd7bd">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/home/joao/Documents/UFV/CCF 331 - GRAFOS/TP1/GraphsLib/BibliotecaGrafos/BibliotecaGrafos/ConversaoJson" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="024eed6d-ba7e-4bfc-90c8-52e4970dd7bd" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -124,6 +179,7 @@
     <MESSAGE value="Criação primeiras classes" />
     <MESSAGE value="Criação do &quot;esqueleto&quot; e das primeiras funções" />
     <MESSAGE value="Fim da criação das funções basicas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fim da criação das funções basicas" />
+    <MESSAGE value="Conclusão das funçẽos do grafo (parte 1) testadas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Conclusão das funçẽos do grafo (parte 1) testadas" />
   </component>
 </project>

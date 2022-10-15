@@ -18,7 +18,7 @@ Alunos responsáveis:
 
 package br.ufv.caf.BibliotecaGrafos;
 
-public class Main {
+public class TesteClasses {
     public static void main(String[] args) {
 
         Grafo grafo = new Grafo();
