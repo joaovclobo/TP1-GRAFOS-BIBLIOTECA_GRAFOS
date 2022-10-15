@@ -1,36 +1,69 @@
 /*
-
 Universidade Federal De Viçosa - Campus Florestal
 Trabalho prático 1 - Disciplina CCF 331 - TEORIA E MODELO DE GRAFOS
-
 Professor responsável:
-
   - Marcus Henrique Soares Mendes
-
 Alunos responsáveis:
-
   - Thiago Rocha - 4225
   - Douglas Silva - 4253
   - Lucas Souza - 4235
   - João Lobo - 4693
-
 */
 
 package br.ufv.caf.BibliotecaGrafos;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        
         Grafo grafo = new Grafo();
-        grafo.addVertices(5);
+        
+        int opcaoMontagem;
+        Scanner in = new Scanner(System.in);
+        
+        System.out.println("Digite a opcao que deseja:\n 1- Montagem automatica\n 2- Montagem manual");
+        
+        opcaoMontagem = in.nextInt();
+        
+        if(opcaoMontagem == 1){
+            
+            grafo.montarGrafo("/home/douglas/Desktop/arquivoQuestao11.txt");
+        }
+        else{
+            
+        int numeroVertices,vertice1, vertice2;
+        float pesoAresta;
+        String dados[], dadosAresta[];
+        
+        LeitorDeArquivo leituraArquivo = new LeitorDeArquivo();
+        
+        
+        dados = leituraArquivo.leitura("/home/douglas/Desktop/arquivoQuestao11.txt");
+        
+        numeroVertices = leituraArquivo.getNumVertices();   
 
-        grafo.addAresta(1, 2, 1.2);
-        grafo.addAresta(2, 5, 2.3);
-        grafo.addAresta(3, 5, -8.4);
-        grafo.addAresta(3, 4, 0.3);
-        grafo.addAresta(4, 5, 4.6);
-        grafo.addAresta(1, 5, 0.1);
-
+        grafo.addVertices(numeroVertices);
+        
+        for(int i = 1; i < leituraArquivo.getQuantidadeArestas(); i++){
+            
+            dadosAresta = dados[i].split(" ");
+            
+            vertice1 = Integer.parseInt(dadosAresta[0]);
+            
+            vertice2 = Integer.parseInt(dadosAresta[1]);
+            
+            pesoAresta = Float.parseFloat(dadosAresta[2]);
+            
+            grafo.addAresta(vertice1, vertice2, pesoAresta);
+            
+        }
+        
+            
+        }
+        
+        
         grafo.printGrafo();
 
         System.out.println("\n");
@@ -39,5 +72,6 @@ public class Main {
         System.out.println("Vizinhos: " + grafo.getVizinhos(5));
         System.out.println("Grau: " + grafo.getGrau(2));
         System.out.println("Sequencia de graus: " + grafo.getSequenciaGraus());
+
     }
 }

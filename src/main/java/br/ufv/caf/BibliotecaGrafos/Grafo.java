@@ -1,29 +1,30 @@
 /*
-
 Universidade Federal De Viçosa - Campus Florestal
 Trabalho prático 1 - Disciplina CCF 331 - TEORIA E MODELO DE GRAFOS
-
 Professor responsável:
-
   - Marcus Henrique Soares Mendes
-
 Alunos responsáveis:
-
   - Thiago Rocha - 4225
   - Douglas Silva - 4253
   - Lucas Souza - 4235
   - João Lobo - 4693
-
 */
 
 package br.ufv.caf.BibliotecaGrafos;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Grafo {
+    
     private ArrayList<Aresta> arestas ;
     private ArrayList<Vertice> vertices;
+    
+    private int vertice1, vertice2, numeroVertices;    
+    private float pesoAresta;   
+    private String dados[], dadosAresta[];
+        
 
     public Grafo() {
         arestas = new ArrayList<>();
@@ -61,6 +62,30 @@ public class Grafo {
     }
 
     /*------------ Funções para iniciar e mostrar o grafo ------------*/
+    
+    public void montarGrafo(String enderecoArquivo) throws IOException{
+        
+        LeitorDeArquivo leituraArquivo = new LeitorDeArquivo();
+        
+        this.dados = leituraArquivo.leitura(enderecoArquivo);
+        
+        this.numeroVertices = leituraArquivo.getNumVertices();   
+
+        this.addVertices(numeroVertices);
+        for(int i = 1; i < leituraArquivo.getQuantidadeArestas(); i++){
+            
+            this.dadosAresta = this.dados[i].split(" ");
+            
+            this.vertice1 = Integer.parseInt(this.dadosAresta[0]);
+            
+            this.vertice2 = Integer.parseInt(this.dadosAresta[1]);
+            
+            this.pesoAresta = Float.parseFloat(this.dadosAresta[2]);
+            
+            this.addAresta(vertice1, vertice2, pesoAresta);
+        }
+        
+    }
 
     public void addAresta(int indVertice1, int indVertice2, double peso){
 
