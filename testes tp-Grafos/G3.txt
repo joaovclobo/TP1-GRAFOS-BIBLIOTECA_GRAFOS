@@ -1,0 +1,73 @@
+-ordem: 6
+
+-tamanho: 6
+
+-vizinhos:
+vértice  |1  |2  |3    |4    |5  |
+vizinhos |3,5|3,4|2,4,1|3,2,5|4,1|
+
+-grau
+vértice|1|2|3|4|5|6|
+grau   |2|2|3|3|2|0|
+
+-sequencia de graus: [3,3,2,2,2,0]
+
+-excentricidade:
+vétice        |1  |2|3  |4  |5  |6       |
+excentricidade|8.6|8|6.3|8.6|6.3|infinito|
+
+-Raio: 6.3
+
+-Diametro: 8.6
+
+-Centro: [3,5]
+
+-sequencia da busca em profundidade: 
+
+[1,3,2,4,5,6]
+
+arestas de retorno: {(4,3),(5,1)}
+
+- centralidade de proximidade C
+vértice   | 1       | 2        | 3        | 4        | 5        |6                        |
+valor de C|acho que todos tendem a zero já que a distancia de todos até o 6 é infinito    | 
+
+-distancia e caminho mínimo
+
+vértice|vértice destino|distancia |caminho
+  1    |        2      |    8     |1->3->2
+  1    |        3      |    6     |1->3
+  1    |        4      |    8.6   |1->5->4
+  1    |        5      |    6.3   |1->5
+
+
+
+vértice|vértice destino|distancia |caminho
+  2    |        1      |   8      |2->3->1
+  2    |        3      |   2      |2->3
+  2    |        4      |    2     |2->4
+  2    |        5      |    4.3   |2->4->5
+
+
+vértice|vértice destino|distancia |caminho
+  3    |        1      |    6     |3->1
+  3    |        2      |     2    |3->2
+  3    |        4      |     4    |3->2->4
+  3    |        5      |     6.3  |3->2->4->5
+
+
+vértice|vértice destino|distancia |caminho
+  4    |        1      |    8.6   |4->5->1
+  4    |        2      |      2   |4->2
+  4    |        3      |     4    |4->2->3
+  4    |        5      |     2.3  |4->5
+
+
+vértice|vértice destino|distancia |caminho
+  5    |        1      |     6.3  |5->1
+  5    |        2      |     4.3  |5->4->2
+  5    |        3      |     6.3  |5->4->2->3
+  5    |        4      |     2.3  |5->4
+
+
+em relação ao 6 a distancia é sempre infinita e o caminho não existe
