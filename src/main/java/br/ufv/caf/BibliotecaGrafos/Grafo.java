@@ -24,13 +24,138 @@ public class Grafo {
     private int vertice1, vertice2, numeroVertices;    
     private float pesoAresta;   
     private String dados[], dadosAresta[];
-        
+
+
+
+    /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
+    private double[][] L;
+    private int[][] R;
+
 
     public Grafo() {
         arestas = new ArrayList<>();
         vertices = new ArrayList<>();
     }
 
+    /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
+    /******************************************************************************************/
+
+    /*
+        Autor: ThiagoCaRo
+        Funcionalidade: Inicializar a matriz L conforme o pseudo-algoritmo
+     */
+    private void inicializaMatrizL(){
+        int ordem = getOrdem();
+        this.L = new double[ordem][ordem];
+        for(int i = 0; i < ordem; i++){
+            for(int j = 0; j < ordem; j++){
+                if(i == j)
+                    L[i][j] = 0.0;
+                else{
+
+                    for(Aresta a : arestas){
+                        if((a.indVertice1 == i+1 && a.indVertice2 == j+1) ||
+                                (i+1 == a.indVertice2 && j+1 == a.indVertice1)){
+                            L[i][j] = a.peso;
+                            break;
+                        }
+
+                        else
+                            L[i][j] = Double.POSITIVE_INFINITY;
+
+                    }
+                }
+            }
+        }
+        getL();
+    }
+
+    /*
+        Autor: ThiagoCaRo
+        Funcionalidade: Inicializar a matriz R conforme o pseudo-algoritmo,
+        a matriz L deve ser inicializada primeiro
+     */
+    private void inicializaMatrizR(){
+        int ordem = getOrdem();
+        this.R = new int[ordem][ordem];
+
+        for(int i = 0; i < ordem; i++){
+            for(int j = 0; j < ordem; j++){
+
+                if(this.L[i][j] == Double.POSITIVE_INFINITY)
+                    R[i][j] = 0;
+
+                else
+                    R[i][j] = i+1;
+            }
+        }
+    }
+
+
+    /*
+        Autor: ThiagoCaRo
+        Funcionalidade: Execução do algoritmo de fato alterando os valores de L e R
+     */
+
+
+    private boolean Floyd_Warshall(){
+        int ordem = getOrdem();
+        for(int i = 0; i < ordem; i++){
+            for(int j = 0; j < ordem; j++){
+                if(L[i][j]<0.0)
+                    return false;
+                for(int k = 0; k < ordem; k++){
+                    if(L[i][j] > (L[i][k] + L[k][j])){
+                        L[i][j] = L[i][k] + L[k][j];
+                        R[i][j] = R[k][j];
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /*
+        Autor: ThiagoCaRo
+        Funcionalidade: Retorna a matriz R
+     */
+    public void getR(){
+        int ordem = getOrdem();
+        for(int i = 0; i < ordem; i++){
+            System.out.print((i+1)+" ");
+
+        }
+
+        //System.out.println("\n-------------------------------");
+        for(int i = 0; i < ordem; i++) {
+            System.out.println();
+            for (int j = 0; j < ordem; j++) {
+                System.out.printf("%d ",R[i][j]);
+            }
+        }
+    }
+
+    /*
+        Autor: ThiagoCaRo
+        Funcionalidade: Retorna a matriz L
+     */
+    public void getL(){
+        int ordem = getOrdem();
+        for(int i = 0; i < ordem; i++) {
+            System.out.println();
+            for (int j = 0; j < ordem; j++) {
+                System.out.printf("%f ",L[i][j]);
+            }
+        }
+    }
+
+    /************************************************************************************/
+    /******************************** FIM Floyd-Warshall *******************************/
+    public void calculaCaminhoMin(){
+        inicializaMatrizL();
+        inicializaMatrizR();
+        Floyd_Warshall();
+    }
     /*------------ Funções da biblioteca ------------*/
 
     public int getOrdem(){
@@ -63,7 +188,7 @@ public class Grafo {
 
     /*------------ Funções para iniciar e mostrar o grafo ------------*/
     
-    public void montarGrafo(String enderecoArquivo) throws IOException{
+    public boolean montarGrafo(String enderecoArquivo) throws IOException{
         
         LeitorDeArquivo leituraArquivo = new LeitorDeArquivo();
         
@@ -84,7 +209,12 @@ public class Grafo {
             
             this.addAresta(vertice1, vertice2, pesoAresta);
         }
-        
+
+
+        inicializaMatrizL();
+        inicializaMatrizR();
+        return Floyd_Warshall();
+
     }
 
     public void addAresta(int indVertice1, int indVertice2, double peso){
@@ -117,7 +247,7 @@ public class Grafo {
         System.out.println("\n-------- Vertices --------\n");
 
         for (Vertice vertice: vertices) {
-            System.out.println(vertice);;
+            System.out.println(vertice);
         }
         System.out.println("\n-------- Arestas --------\n");
 
@@ -125,5 +255,8 @@ public class Grafo {
             System.out.println(aresta);
         }
     }
+
+    //Função sujeita  alterações
+
 
 }
