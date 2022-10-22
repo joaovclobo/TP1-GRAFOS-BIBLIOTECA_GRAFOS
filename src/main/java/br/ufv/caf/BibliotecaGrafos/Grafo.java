@@ -189,7 +189,7 @@ public class Grafo {
     public boolean montarGrafo(String enderecoArquivo) throws IOException{
 
         int vertice1, vertice2, numeroVertices;
-        float pesoAresta;
+        double pesoAresta;
         String dados[], dadosAresta[];
         
         LeitorDeArquivo leituraArquivo = new LeitorDeArquivo();
@@ -206,7 +206,7 @@ public class Grafo {
             
             vertice2 = Integer.parseInt(dadosAresta[1]);
             
-            pesoAresta = Float.parseFloat(dadosAresta[2]);
+            pesoAresta = Double.parseDouble(dadosAresta[2]);
             
             addAresta(vertice1, vertice2, pesoAresta);
         }
