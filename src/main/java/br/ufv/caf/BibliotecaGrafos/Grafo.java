@@ -15,27 +15,25 @@ package br.ufv.caf.BibliotecaGrafos;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 public class Grafo {
     
     private ArrayList<Aresta> arestas ;
     private ArrayList<Vertice> vertices;
-
-
-    private int vertice1, vertice2, numeroVertices;    
-    private float pesoAresta;   
-    private String dados[], dadosAresta[];
-
-
+    private ArrayList<LinkedList<Integer>> listaAdjacncia;
 
     /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
+
+    //TODO só precisam ser iniciadas nos metodos - João
+
     private double[][] L;
     private int[][] R;
-
 
     public Grafo() {
         arestas = new ArrayList<>();
         vertices = new ArrayList<>();
+        listaAdjacncia = new ArrayList<>();
     }
 
     /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
@@ -68,7 +66,7 @@ public class Grafo {
                 }
             }
         }
-
+        getL();
     }
 
     /*
@@ -92,13 +90,10 @@ public class Grafo {
         }
     }
 
-
     /*
         Autor: ThiagoCaRo
         Funcionalidade: Execução do algoritmo de fato alterando os valores de L e R
      */
-
-
     private boolean Floyd_Warshall(){
         int ordem = getOrdem();
         for(int i = 0; i < ordem; i++){
@@ -126,11 +121,7 @@ public class Grafo {
             System.out.print((i+1)+" ");
 
         }
-        System.out.println();
-        for(int i = 0; i < ordem; i++){
-            System.out.print("- ");
 
-        }
         //System.out.println("\n-------------------------------");
         for(int i = 0; i < ordem; i++) {
             System.out.println();
@@ -146,69 +137,22 @@ public class Grafo {
      */
     public void getL(){
         int ordem = getOrdem();
-
-        for(int i = 0; i < ordem; i++){
-            System.out.print((i+1)+" ");
-
-        }
-        System.out.println();
-        for(int i = 0; i < ordem; i++){
-            System.out.print("- ");
-
-        }
-
         for(int i = 0; i < ordem; i++) {
             System.out.println();
             for (int j = 0; j < ordem; j++) {
-                System.out.printf("%.2f ",L[i][j]);
+                System.out.printf("%f ",L[i][j]);
             }
         }
     }
 
     /************************************************************************************/
     /******************************** FIM Floyd-Warshall *******************************/
+
     public void calculaCaminhoMin(){
         inicializaMatrizL();
         inicializaMatrizR();
         Floyd_Warshall();
     }
-
-    public double calculaExcentricidade(int vertice){
-        int ordem = getOrdem();
-        double excentricidade = 0.0;
-        for(int i = 0; i < ordem; i++){
-            if(this.L[vertice][i] > excentricidade)
-                excentricidade = this.L[vertice][i];
-        }
-        return excentricidade;
-    }
-
-    public double calculaRaio(){
-        int ordem = getOrdem();
-        double excentricidadeaux = calculaExcentricidade(0);
-        double excentricidademem;
-        for(int i = 1; i < ordem; i++){
-            excentricidademem = calculaExcentricidade(i);
-            if(excentricidademem < excentricidadeaux)
-                excentricidadeaux = excentricidademem;
-
-        }
-        return excentricidadeaux;
-    }
-
-    public double calculaDiametro(){
-        int ordem = getOrdem();
-        double excentricidadeaux = calculaExcentricidade(0);
-        double excentricidademem;
-        for(int i = 1; i < ordem; i++){
-            excentricidademem = calculaExcentricidade(i);
-            if(excentricidademem > excentricidadeaux)
-                excentricidadeaux = excentricidademem;
-
-        }
-        return excentricidadeaux;
-    }
-
 
     /*------------ Funções da biblioteca ------------*/
 
@@ -220,12 +164,12 @@ public class Grafo {
         return arestas.size();
     }
 
-    public ArrayList<Integer> getVizinhos(int indVetice) {
-        return vertices.get(indVetice - 1).getVizinhosVertice();
+    public LinkedList<Integer> getVizinhos(int indVetice) {
+        return listaAdjacncia.get(indVetice - 1);
     }
 
     public int getGrau(int indVetice){
-        return vertices.get(indVetice).getGrau();
+        return vertices.get(indVetice - 1).getGrau();
     }
 
     public ArrayList<Integer> getSequenciaGraus(){
@@ -241,29 +185,33 @@ public class Grafo {
     }
 
     /*------------ Funções para iniciar e mostrar o grafo ------------*/
-    
+
     public boolean montarGrafo(String enderecoArquivo) throws IOException{
+
+        int vertice1, vertice2, numeroVertices;
+        double pesoAresta;
+        String dados[], dadosAresta[];
         
         LeitorDeArquivo leituraArquivo = new LeitorDeArquivo();
         
-        this.dados = leituraArquivo.leitura(enderecoArquivo);
-        
-        this.numeroVertices = leituraArquivo.getNumVertices();   
+        dados = leituraArquivo.leitura(enderecoArquivo);
 
-        this.addVertices(numeroVertices);
+        this.addVertices(leituraArquivo.getNumVertices());
+
         for(int i = 1; i < leituraArquivo.getQuantidadeArestas(); i++){
             
-            this.dadosAresta = this.dados[i].split(" ");
+            dadosAresta = dados[i].split(" ");
             
-            this.vertice1 = Integer.parseInt(this.dadosAresta[0]);
+            vertice1 = Integer.parseInt(dadosAresta[0]);
             
-            this.vertice2 = Integer.parseInt(this.dadosAresta[1]);
+            vertice2 = Integer.parseInt(dadosAresta[1]);
             
-            this.pesoAresta = Float.parseFloat(this.dadosAresta[2]);
+            pesoAresta = Double.parseDouble(dadosAresta[2]);
             
-            this.addAresta(vertice1, vertice2, pesoAresta);
+            addAresta(vertice1, vertice2, pesoAresta);
         }
 
+    //TODO Isso não precisa ficar junto da montagem do grafo - João
 
         inicializaMatrizL();
         inicializaMatrizR();
@@ -271,46 +219,55 @@ public class Grafo {
 
     }
 
+    private void addVizinho(int indVertice, int indVizinho){
+
+        listaAdjacncia.get(indVertice - 1).add(indVizinho);
+
+        Collections.sort(listaAdjacncia.get(indVertice -1));
+
+    }
+
     public void addAresta(int indVertice1, int indVertice2, double peso){
 
-        Vertice vertice1 = vertices.get(indVertice1 - 1);
-        Vertice vertice2 = vertices.get(indVertice2 - 1);
+        vertices.get(indVertice1 - 1).aumentaGrau();
+        vertices.get(indVertice2 - 1).aumentaGrau();
 
-        vertice1.aumentaGrau();
-        vertice2.aumentaGrau();
-
-        vertice1.addVizinho(vertice2);
-        vertice2.addVizinho(vertice1);
+        addVizinho(indVertice1, indVertice2);
+        addVizinho(indVertice2, indVertice1);
 
         this.arestas.add(new Aresta(indVertice1, indVertice2, peso));
 
     }
 
     private void addVertice(int indice){
+
         Vertice vertice = new Vertice(indice);
         this.vertices.add(vertice);
+
     }
 
     public void addVertices(int numeroVertices){
+
         for (int i = 0; i < numeroVertices; i++) {
+
+            listaAdjacncia.add(new LinkedList<>());
             addVertice(i + 1);
         }
+
     }
 
     void printGrafo(){
-        System.out.println("\n-------- Vertices --------\n");
 
+        System.out.println("\n-------- Vertices --------\n");
         for (Vertice vertice: vertices) {
             System.out.println(vertice);
         }
-        System.out.println("\n-------- Arestas --------\n");
 
+        System.out.println("\n-------- Arestas --------\n");
         for (Aresta aresta: arestas) {
             System.out.println(aresta);
         }
+
     }
-
-    //Função sujeita  alterações
-
 
 }

@@ -37,9 +37,5 @@ public class LeitorDeArquivo {
         return qntArestas;
         
     }
-    
-    
-    
-    
-    
+
 }

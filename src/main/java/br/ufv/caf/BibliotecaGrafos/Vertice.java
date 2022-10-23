@@ -18,51 +18,26 @@ Alunos responsáveis:
 
 package br.ufv.caf.BibliotecaGrafos;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class Vertice {
 
     private int indice;
-    private ArrayList<Vertice> vizinhos;
     private int grau;
 
     protected Vertice(int indice) {
         this.indice = indice;
-        this.vizinhos = new ArrayList<>();
         this.grau = 0;
-    }
-
-    private int getIndice() {
-        return indice;
     }
 
     protected int getGrau() {
         return grau;
     }
 
-    protected void addVizinho(Vertice vizinho){
-        this.vizinhos.add(vizinho);
-    }
-
     protected void aumentaGrau(){
         this.grau++;
     }
 
-    protected ArrayList<Integer> getVizinhosVertice() {
-        ArrayList indVizinhos = new ArrayList();
-
-        for (Vertice v : vizinhos) {
-            indVizinhos.add(v.getIndice());
-        };
-
-        Collections.sort(indVizinhos);
-
-        return indVizinhos;
-    }
-
     @Override
     public String toString(){
-        return "Vertice: " + this.indice + " - Grau: " + this.grau + " - Vizinhos: " +  this.getVizinhosVertice();
+        return "Vertice: " + this.indice + " - Grau: " + this.grau;
     }
 }
