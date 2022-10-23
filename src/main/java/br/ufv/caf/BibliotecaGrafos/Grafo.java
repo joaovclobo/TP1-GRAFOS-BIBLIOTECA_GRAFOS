@@ -20,7 +20,8 @@ public class Grafo {
     
     private ArrayList<Aresta> arestas ;
     private ArrayList<Vertice> vertices;
-    
+
+
     private int vertice1, vertice2, numeroVertices;    
     private float pesoAresta;   
     private String dados[], dadosAresta[];
@@ -67,7 +68,7 @@ public class Grafo {
                 }
             }
         }
-        getL();
+
     }
 
     /*
@@ -125,7 +126,11 @@ public class Grafo {
             System.out.print((i+1)+" ");
 
         }
+        System.out.println();
+        for(int i = 0; i < ordem; i++){
+            System.out.print("- ");
 
+        }
         //System.out.println("\n-------------------------------");
         for(int i = 0; i < ordem; i++) {
             System.out.println();
@@ -141,10 +146,21 @@ public class Grafo {
      */
     public void getL(){
         int ordem = getOrdem();
+
+        for(int i = 0; i < ordem; i++){
+            System.out.print((i+1)+" ");
+
+        }
+        System.out.println();
+        for(int i = 0; i < ordem; i++){
+            System.out.print("- ");
+
+        }
+
         for(int i = 0; i < ordem; i++) {
             System.out.println();
             for (int j = 0; j < ordem; j++) {
-                System.out.printf("%f ",L[i][j]);
+                System.out.printf("%.2f ",L[i][j]);
             }
         }
     }
@@ -156,6 +172,44 @@ public class Grafo {
         inicializaMatrizR();
         Floyd_Warshall();
     }
+
+    public double calculaExcentricidade(int vertice){
+        int ordem = getOrdem();
+        double excentricidade = 0.0;
+        for(int i = 0; i < ordem; i++){
+            if(this.L[vertice][i] > excentricidade)
+                excentricidade = this.L[vertice][i];
+        }
+        return excentricidade;
+    }
+
+    public double calculaRaio(){
+        int ordem = getOrdem();
+        double excentricidadeaux = calculaExcentricidade(0);
+        double excentricidademem;
+        for(int i = 1; i < ordem; i++){
+            excentricidademem = calculaExcentricidade(i);
+            if(excentricidademem < excentricidadeaux)
+                excentricidadeaux = excentricidademem;
+
+        }
+        return excentricidadeaux;
+    }
+
+    public double calculaDiametro(){
+        int ordem = getOrdem();
+        double excentricidadeaux = calculaExcentricidade(0);
+        double excentricidademem;
+        for(int i = 1; i < ordem; i++){
+            excentricidademem = calculaExcentricidade(i);
+            if(excentricidademem > excentricidadeaux)
+                excentricidadeaux = excentricidademem;
+
+        }
+        return excentricidadeaux;
+    }
+
+
     /*------------ Funções da biblioteca ------------*/
 
     public int getOrdem(){
