@@ -147,6 +147,46 @@ public class Grafo {
 
     /************************************************************************************/
     /******************************** FIM Floyd-Warshall *******************************/
+    public double calculaExcentricidade(int vertice){
+        int ordem = getOrdem();
+        double excentricidade = 0.0;
+        for(int i = 0; i < ordem; i++){
+            if(this.L[vertice][i] > excentricidade)
+                excentricidade = this.L[vertice][i];
+        }
+        return excentricidade;
+    }
+
+    public double calculaRaio(){
+        int ordem = getOrdem();
+        double excentricidadeaux = calculaExcentricidade(0);
+        double excentricidademem;
+        for(int i = 1; i < ordem; i++){
+            excentricidademem = calculaExcentricidade(i);
+            if(excentricidademem < excentricidadeaux)
+                excentricidadeaux = excentricidademem;
+
+        }
+        return excentricidadeaux;
+    }
+
+    public double calculaDiametro(){
+        int ordem = getOrdem();
+        double excentricidadeaux = calculaExcentricidade(0);
+        double excentricidademem;
+        for(int i = 1; i < ordem; i++){
+            excentricidademem = calculaExcentricidade(i);
+            if(excentricidademem > excentricidadeaux)
+                excentricidadeaux = excentricidademem;
+
+        }
+        return excentricidadeaux;
+    }
+
+
+
+
+
 
     public void calculaCaminhoMin(){
         inicializaMatrizL();
