@@ -70,6 +70,9 @@ public class Main {
         System.out.println("Grau: " + grafo.getGrau(4));
         System.out.println("Grau: " + grafo.getGrau(5));
         System.out.println("Sequencia de graus: " + grafo.getSequenciaGraus());
+        grafo.BuscaProfundidade(1);
+        System.out.println("sequencia da busca em profundidade: " + grafo.OrdemBusca);
+        System.out.println("Arestas que não fazem parte da busca: " + grafo.ArestasRetorno);
 
         // TODO: 22/10/2022 - Isso pode ficar na função, colocar isso na main não fica legal
 

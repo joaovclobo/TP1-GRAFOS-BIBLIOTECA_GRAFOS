@@ -22,6 +22,8 @@ public class Grafo {
     private ArrayList<Aresta> arestas ;
     private ArrayList<Vertice> vertices;
     private ArrayList<LinkedList<Integer>> listaAdjacncia;
+    public ArrayList<Vertice> OrdemBusca;
+    public ArrayList<Aresta> ArestasRetorno;
 
     /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
 
@@ -34,6 +36,8 @@ public class Grafo {
         arestas = new ArrayList<>();
         vertices = new ArrayList<>();
         listaAdjacncia = new ArrayList<>();
+        OrdemBusca = new ArrayList<>();
+        ArestasRetorno = new ArrayList<>();
     }
 
     /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
@@ -309,5 +313,36 @@ public class Grafo {
         }
 
     }
-
+    
+    public void BuscaProfundidade(int v){
+        for(Vertice vertice: vertices){
+            if(vertice.getIndice() == v){
+                vertice.marcado = true;
+                OrdemBusca.add(vertice);
+            }
+        }
+        for(int w: this.getVizinhos(v)){
+            for(Vertice ver: vertices){
+                if(ver.getIndice() == w && ver.marcado == false){
+                    for(Aresta a: arestas){
+                        if((a.indVertice1 == v && a.indVertice2 == w)||(a.indVertice1 == w && a.indVertice2 == v)){
+                            a.explorada = true;
+                        }
+                    }
+                    ver.marcado = true;
+                    BuscaProfundidade(w);
+                }
+                else if (ver.getIndice() == w && ver.marcado == true){
+                    for(Aresta are: arestas){
+                        if((are.indVertice1 == v && are.indVertice2 == w)||(are.indVertice1 == w && are.indVertice2 == v)){
+                            if(are.explorada == false){
+                                are.explorada = true;
+                                ArestasRetorno.add(are);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

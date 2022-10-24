@@ -22,16 +22,22 @@ public class Vertice {
 
     private int indice;
     private int grau;
+    boolean marcado;
 
     protected Vertice(int indice) {
         this.indice = indice;
         this.grau = 0;
+        this.marcado = false;
     }
 
     protected int getGrau() {
         return grau;
     }
 
+    public int getIndice() {
+        return indice;
+    }
+    
     protected void aumentaGrau(){
         this.grau++;
     }
