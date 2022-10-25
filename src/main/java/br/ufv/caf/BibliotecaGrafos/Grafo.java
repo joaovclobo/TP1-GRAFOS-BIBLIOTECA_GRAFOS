@@ -70,7 +70,6 @@ public class Grafo {
                 }
             }
         }
-        getL();
     }
 
     /*
@@ -345,4 +344,20 @@ public class Grafo {
             }
         }
     }
+    
+    public float centralidadeGrafo(int indVertice){
+        this.calculaCaminhoMin();
+        float somaCaminhoMin = 0;
+        float centralidade;
+        int ordem;
+
+        ordem = this.getOrdem();
+        for (int j = 0; j < ordem; j++) {
+            somaCaminhoMin += this.L[indVertice-1][j];
+        }
+        centralidade = (ordem-1)/somaCaminhoMin;
+        return centralidade;
+    }
 }
+
+
