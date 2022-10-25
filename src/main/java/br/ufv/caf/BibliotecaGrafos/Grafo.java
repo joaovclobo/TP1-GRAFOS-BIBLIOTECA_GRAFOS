@@ -23,6 +23,8 @@ public class Grafo {
     private ArrayList<Vertice> vertices;
     private ArrayList<LinkedList<Integer>> listaAdjacncia;
 
+    private ArrayList<Vertice> centro;
+
     /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
 
     //TODO só precisam ser iniciadas nos metodos - João
@@ -34,6 +36,7 @@ public class Grafo {
         arestas = new ArrayList<>();
         vertices = new ArrayList<>();
         listaAdjacncia = new ArrayList<>();
+        centro = new ArrayList<>();
     }
 
     /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
@@ -140,7 +143,7 @@ public class Grafo {
         for(int i = 0; i < ordem; i++) {
             System.out.println();
             for (int j = 0; j < ordem; j++) {
-                System.out.printf("%f ",L[i][j]);
+                System.out.printf("%.2f ",L[i][j]);
             }
         }
     }
@@ -185,7 +188,25 @@ public class Grafo {
 
 
 
+    public void calculaCentro(){
+        int ordem = getOrdem();
+        double raio = calculaRaio();
 
+        for(int i = 0; i < ordem; i++){
+            for(int j = 0; j < ordem; j++){
+                if(this.L[i][j] == raio) {
+                    this.centro.add(vertices.get(i));
+                    break;
+                }
+            }
+        }
+    }
+
+    public void getCentro(){
+        for(int i = 0; i < centro.size(); i++){
+            System.out.println(centro.get(i).toString());
+        }
+    }
 
 
     public void calculaCaminhoMin(){

@@ -34,8 +34,8 @@ public class Main {
             // TODO: 22/10/2022 - Manter só entrada do endereço pelo terminal
 //            enderecoArquivo = in.next();
 
-            enderecoArquivo = "/home/joao/Documents/UFV/CCF 331 - GRAFOS/TP1/GraphsLib/BibliotecaGrafos/BibliotecaGrafos/ConversaoJson/ExConversao/extxt.txt";
-//            enderecoArquivo = "/home/thiagocr/Documentos/grafo1";
+            //enderecoArquivo = "/home/joao/Documents/UFV/CCF 331 - GRAFOS/TP1/GraphsLib/BibliotecaGrafos/BibliotecaGrafos/ConversaoJson/ExConversao/extxt.txt";
+            enderecoArquivo = "/home/thiagocr/Documentos/grafo1";
 //            enderecoArquivo = "/home/douglas/Desktop/arquivoQuestao11.txt";
 
             flag  = grafo.montarGrafo(enderecoArquivo);
@@ -74,8 +74,15 @@ public class Main {
         // TODO: 22/10/2022 - Isso pode ficar na função, colocar isso na main não fica legal
 
         if(flag) {
-            //grafo.getL();
+            grafo.getL();
+            System.out.println();
             grafo.getR();
+            System.out.println();
+            System.out.println(grafo.calculaDiametro());
+
+            System.out.println(grafo.calculaRaio());
+            grafo.calculaCentro();
+            grafo.getCentro();
         }
         else
             System.out.println("GRAFO COM CICLO!!!");
