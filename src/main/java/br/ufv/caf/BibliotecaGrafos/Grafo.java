@@ -22,6 +22,8 @@ public class Grafo {
     private ArrayList<Aresta> arestas ;
     private ArrayList<Vertice> vertices;
     private ArrayList<LinkedList<Integer>> listaAdjacncia;
+    public ArrayList<Vertice> OrdemBusca;
+    public ArrayList<Aresta> ArestasRetorno;
 
     private ArrayList<Vertice> centro;
 
@@ -37,6 +39,8 @@ public class Grafo {
         vertices = new ArrayList<>();
         listaAdjacncia = new ArrayList<>();
         centro = new ArrayList<>();
+        OrdemBusca = new ArrayList<>();
+        ArestasRetorno = new ArrayList<>();
     }
 
     /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
@@ -143,7 +147,7 @@ public class Grafo {
         for(int i = 0; i < ordem; i++) {
             System.out.println();
             for (int j = 0; j < ordem; j++) {
-                System.out.printf("%.2f ",L[i][j]);
+                System.out.printf("%f ",L[i][j]);
             }
         }
     }
@@ -331,4 +335,51 @@ public class Grafo {
 
     }
 
+    public void BuscaProfundidade(int v){
+        for(Vertice vertice: vertices){
+            if(vertice.getIndice() == v){
+                vertice.marcado = true;
+                OrdemBusca.add(vertice);
+            }
+        }
+        for(int w: this.getVizinhos(v)){
+            for(Vertice ver: vertices){
+                if(ver.getIndice() == w && ver.marcado == false){
+                    for(Aresta a: arestas){
+                        if((a.indVertice1 == v && a.indVertice2 == w)||(a.indVertice1 == w && a.indVertice2 == v)){
+                            a.explorada = true;
+                        }
+                    }
+                    ver.marcado = true;
+                    BuscaProfundidade(w);
+                }
+                else if (ver.getIndice() == w && ver.marcado == true){
+                    for(Aresta are: arestas){
+                        if((are.indVertice1 == v && are.indVertice2 == w)||(are.indVertice1 == w && are.indVertice2 == v)){
+                            if(are.explorada == false){
+                                are.explorada = true;
+                                ArestasRetorno.add(are);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public float centralidadeGrafo(int indVertice){
+        this.calculaCaminhoMin();
+        float somaCaminhoMin = 0;
+        float centralidade;
+        int ordem;
+
+        ordem = this.getOrdem();
+        for (int j = 0; j < ordem; j++) {
+            somaCaminhoMin += this.L[indVertice-1][j];
+        }
+        centralidade = (ordem-1)/somaCaminhoMin;
+        return centralidade;
+    }
 }
+
+

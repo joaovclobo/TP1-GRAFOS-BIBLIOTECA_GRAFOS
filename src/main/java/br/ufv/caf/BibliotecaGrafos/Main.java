@@ -45,13 +45,21 @@ public class Main {
 
             grafo.addVertices(5);
 
-            grafo.addAresta(1, 2, 1.2);
+            /*grafo.addAresta(1, 2, 1.2);
             grafo.addAresta(2, 5, 2.3);
             grafo.addAresta(3, 5, -8.4);
             grafo.addAresta(3, 4, 0.3);
             grafo.addAresta(4, 5, 4.6);
-            grafo.addAresta(1, 5, 0.1);
-
+            grafo.addAresta(1, 5, 0.1);*/
+            
+            grafo.addAresta(1, 2, 1.1);
+            grafo.addAresta(1,3,2.3);
+            grafo.addAresta(2, 5, 3.9);
+            grafo.addAresta(2, 3, 3);
+            grafo.addAresta(3, 4, 4.7);
+            grafo.addAresta(4, 5, 6);
+            grafo.addAresta(2, 4, 2);
+        
         }
 
         grafo.printGrafo();
@@ -70,6 +78,12 @@ public class Main {
         System.out.println("Grau: " + grafo.getGrau(4));
         System.out.println("Grau: " + grafo.getGrau(5));
         System.out.println("Sequencia de graus: " + grafo.getSequenciaGraus());
+        grafo.BuscaProfundidade(1);
+        System.out.println("sequencia da busca em profundidade: " + grafo.OrdemBusca);
+        System.out.println("Arestas que não fazem parte da busca: " + grafo.ArestasRetorno);
+        System.out.printf("centralidade: %.4f", grafo.centralidadeGrafo(1));
+        
+        
 
         // TODO: 22/10/2022 - Isso pode ficar na função, colocar isso na main não fica legal
 
