@@ -213,10 +213,14 @@ public class Grafo {
     }
 
 
-    public void calculaCaminhoMin(){
+    public boolean calculaCaminhoMin(){
         inicializaMatrizL();
         inicializaMatrizR();
-        Floyd_Warshall();
+        return Floyd_Warshall();
+    }
+
+    public double distanciaVertices(int vertice1, int vertice2){
+        return this.L[vertice1-1][vertice2-1];
     }
 
     /*------------ Funções da biblioteca ------------*/
@@ -251,7 +255,7 @@ public class Grafo {
 
     /*------------ Funções para iniciar e mostrar o grafo ------------*/
 
-    public boolean montarGrafo(String enderecoArquivo) throws IOException{
+    public void montarGrafo(String enderecoArquivo) throws IOException{
 
         int vertice1, vertice2, numeroVertices;
         double pesoAresta;
@@ -278,9 +282,7 @@ public class Grafo {
 
         //TODO Isso não precisa ficar junto da montagem do grafo - João
 
-        inicializaMatrizL();
-        inicializaMatrizR();
-        return Floyd_Warshall();
+
 
     }
 

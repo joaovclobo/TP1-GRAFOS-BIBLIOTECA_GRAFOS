@@ -38,7 +38,7 @@ public class Main {
             enderecoArquivo = "/home/thiagocr/Documentos/grafo1";
 //            enderecoArquivo = "/home/douglas/Desktop/arquivoQuestao11.txt";
 
-            flag  = grafo.montarGrafo(enderecoArquivo);
+            grafo.montarGrafo(enderecoArquivo);
 
         }
         else{
@@ -87,7 +87,7 @@ public class Main {
 
         // TODO: 22/10/2022 - Isso pode ficar na função, colocar isso na main não fica legal
 
-        if(flag) {
+        if(grafo.calculaCaminhoMin()) {
             grafo.getL();
             System.out.println();
             grafo.getR();
@@ -97,6 +97,7 @@ public class Main {
             System.out.println(grafo.calculaRaio());
             grafo.calculaCentro();
             grafo.getCentro();
+            System.out.println(grafo.distanciaVertices(5,4));
         }
         else
             System.out.println("GRAFO COM CICLO!!!");
