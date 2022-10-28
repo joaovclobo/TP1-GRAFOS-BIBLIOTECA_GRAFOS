@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-Grafo grafo = new Grafo();
+        Grafo grafo = new Grafo();
         String enderecoArquivo;
         
         boolean flag = true;
