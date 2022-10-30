@@ -154,17 +154,17 @@ public class Grafo {
         int ordem = getOrdem();
         double excentricidade = 0.0;
         for(int i = 0; i < ordem; i++){
-            if(this.L[vertice][i] > excentricidade)
-                excentricidade = this.L[vertice][i];
+            if(this.L[vertice-1][i] > excentricidade)
+                excentricidade = this.L[vertice-1][i];
         }
         return excentricidade;
     }
 
     public double calculaRaio(){
         int ordem = getOrdem();
-        double excentricidadeaux = calculaExcentricidade(0);
+        double excentricidadeaux = calculaExcentricidade(1);
         double excentricidademem;
-        for(int i = 1; i < ordem; i++){
+        for(int i = 2; i <= ordem; i++){
             excentricidademem = calculaExcentricidade(i);
             if(excentricidademem < excentricidadeaux)
                 excentricidadeaux = excentricidademem;
@@ -175,9 +175,9 @@ public class Grafo {
 
     public double calculaDiametro(){
         int ordem = getOrdem();
-        double excentricidadeaux = calculaExcentricidade(0);
+        double excentricidadeaux = calculaExcentricidade(1);
         double excentricidademem;
-        for(int i = 1; i < ordem; i++){
+        for(int i = 2; i <= ordem; i++){
             excentricidademem = calculaExcentricidade(i);
             if(excentricidademem > excentricidadeaux)
                 excentricidadeaux = excentricidademem;
@@ -193,12 +193,12 @@ public class Grafo {
         double raio = calculaRaio();
 
         for(int i = 0; i < ordem; i++){
-            for(int j = 0; j < ordem; j++){
-                if(this.L[i][j] == raio) {
-                    this.centro.add(vertices.get(i));
-                    break;
-                }
+            //for(int j = 0; j < ordem; j++){
+            if(calculaExcentricidade(i+1) == raio) {
+                this.centro.add(vertices.get(i));
+                break;
             }
+            //}
         }
     }
 
