@@ -22,7 +22,7 @@ public class Main {
         
         boolean flag = true;
 
-        int opcao,indVerticeEscolhido;
+        int opcao,indVerticeEscolhido, indVerticeOrigem;
         Scanner in = new Scanner(System.in);
         
         System.out.println("Digite o endereço do arquivo que contém o grafo");
@@ -80,11 +80,30 @@ public class Main {
                     grafo.BuscaProfundidade(indVerticeEscolhido);
                     System.out.println("sequencia da busca em profundidade: " + grafo.OrdemBusca);
                     System.out.println("Arestas que não fazem parte da busca: " + grafo.ArestasRetorno);
+                    grafo.zeroingBuscaProfundidade();
                     break;
                 case 4:
-                    grafo.calculaCaminhoMin();
-                    System.out.println("Matriz de caminho minimos:\n");
-                    grafo.getL();
+                    System.out.println("Qual o vertice escolhido de origem:");
+                    indVerticeOrigem = in.nextInt();
+                    System.out.println("Qual o vertice escolhido para a distancia:");
+                    indVerticeEscolhido = in.nextInt();
+                    if(grafo.calculaCaminhoMin()){
+                        System.out.println("Matriz distancias (L)\n");
+                        grafo.getL();
+                        System.out.println("\n\n");
+
+                        System.out.println("Matriz caminhos (R)\n");
+                        grafo.getR();
+                        System.out.println("\n\n");
+                        System.out.println("Distancia de "+indVerticeOrigem+" para "+indVerticeEscolhido+"\n");
+                        System.out.println(grafo.distanciaVertices(indVerticeOrigem, indVerticeEscolhido));
+                    }
+
+                    else{
+                        System.out.println("O grafo possui ciclo negativo e Floyd Warshall não pode ser aplicado");
+                    }
+
+
                     break;
                 case 5:
                     flag = false;

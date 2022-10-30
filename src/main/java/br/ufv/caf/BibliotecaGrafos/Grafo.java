@@ -124,10 +124,6 @@ public class Grafo {
      */
     public void getR(){
         int ordem = getOrdem();
-        for(int i = 0; i < ordem; i++){
-            System.out.print((i+1)+" ");
-
-        }
 
         //System.out.println("\n-------------------------------");
         for(int i = 0; i < ordem; i++) {
@@ -384,5 +380,17 @@ public class Grafo {
         return centralidade;
     }
 
+    public void zeroingBuscaProfundidade(){
+        this.OrdemBusca.clear();
+        this.ArestasRetorno.clear();
+
+        for(Vertice ver: this.vertices){
+            ver.marcado = false;
+        }
+
+        for(Aresta are: this.arestas){
+            are.explorada = false;
+        }
+    }
 
 }
