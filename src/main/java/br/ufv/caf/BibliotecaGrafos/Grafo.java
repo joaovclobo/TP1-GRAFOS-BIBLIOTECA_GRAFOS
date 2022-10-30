@@ -393,4 +393,8 @@ public class Grafo {
         }
     }
 
+    public void zeroingCentro(){
+        this.centro.clear();
+    }
+
 }

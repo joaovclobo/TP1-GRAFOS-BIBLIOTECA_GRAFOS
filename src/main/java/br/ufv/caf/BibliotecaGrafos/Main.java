@@ -73,6 +73,7 @@ public class Main {
                     grafo.calculaCentro();
                     System.out.printf("Centro: ");
                     grafo.getCentro();
+                    grafo.zeroingCentro();
                     break;
                 case 3:
                     System.out.println("Qual o vertice escolhido para a busca:");
