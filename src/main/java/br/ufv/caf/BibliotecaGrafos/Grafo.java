@@ -397,4 +397,13 @@ public class Grafo {
         this.centro.clear();
     }
 
+    public boolean verificaCiclo(int v){
+        BuscaProfundidade(v);
+
+        if(!this.ArestasRetorno.isEmpty()){
+            return true;
+        }
+
+        return false;
+    }
 }

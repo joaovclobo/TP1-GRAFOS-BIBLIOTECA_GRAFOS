@@ -82,6 +82,9 @@ public class Main {
                     System.out.println("sequencia da busca em profundidade: " + grafo.OrdemBusca);
                     System.out.println("Arestas que não fazem parte da busca: " + grafo.ArestasRetorno);
                     grafo.zeroingBuscaProfundidade();
+                    if(grafo.verificaCiclo(indVerticeEscolhido)){
+                        System.out.println("POSSUI CICLO");
+                    }
                     break;
                 case 4:
                     System.out.println("Qual o vertice escolhido de origem:");
