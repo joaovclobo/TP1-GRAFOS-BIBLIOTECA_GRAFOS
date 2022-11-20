@@ -19,34 +19,30 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Grafo grafo = new Grafo();
         String enderecoArquivo;
-        
+
         boolean flag = true;
 
         int opcao,indVerticeEscolhido, indVerticeOrigem;
         Scanner in = new Scanner(System.in);
-        
+
         System.out.println("Digite o endereço do arquivo que contém o grafo");
         enderecoArquivo = in.nextLine();
-        
-
-            //enderecoArquivo = "/home/joao/Documents/UFV/CCF 331 - GRAFOS/TP1/GraphsLib/BibliotecaGrafos/BibliotecaGrafos/ConversaoJson/ExConversao/extxt.txt";
-            //enderecoArquivo = "/home/thiagocr/Documentos/grafo1";
-//            enderecoArquivo = "/home/douglas/Desktop/grafo1";
 
         grafo.montarGrafo(enderecoArquivo);
 
-        System.out.println("");
-        System.out.println("Qual informação sobre o grafo você deseja:");
-        System.out.println("1 - Informações sobre um vertice em específico;");
-        System.out.println("2 - Informações gerais sobre o grafo;");
-        System.out.println("3 - Relizar busca em profundidade;");
-        System.out.println("4 - Caminho minimo/Distância;");
-        System.out.println("5- Sair.");
-        
-        opcao = in.nextInt();
-        grafo.calculaCaminhoMin();
-        
-        while(flag){
+        do {
+
+            System.out.println("\nQual informação sobre o grafo você deseja:");
+            System.out.println("1 - Informações sobre um vertice em específico;");
+            System.out.println("2 - Informações gerais sobre o grafo;");
+            System.out.println("3 - Relizar busca em profundidade;");
+            System.out.println("4 - Caminho minimo/Distância;");
+            System.out.println("5 - Arvore geradora minima do grafo;");
+            System.out.println("6 - Sair.");
+
+            opcao = in.nextInt();
+            grafo.calculaCaminhoMin();
+
             switch (opcao) {
                 case 1:
                     System.out.println("Qual o vertice escolhido:");
@@ -84,6 +80,9 @@ public class Main {
                     grafo.zeroingBuscaProfundidade();
                     if(grafo.verificaCiclo(indVerticeEscolhido)){
                         System.out.println("POSSUI CICLO");
+                    } else {
+                        System.out.println("NÃO POSSUI CICLO");
+
                     }
                     break;
                 case 4:
@@ -107,25 +106,21 @@ public class Main {
                         System.out.println("O grafo possui ciclo negativo e Floyd Warshall não pode ser aplicado");
                     }
 
-
                     break;
+
                 case 5:
+                    grafo.arvoreMinima();
+                    break;
+
+                case 6:
                     flag = false;
                     break;
+
                 default:
                     System.out.println("Opcao inválida, digite uma opção válida.");
                     break;
             }
-            System.out.println("");
-            System.out.println("Qual informação sobre o grafo você deseja:");
-            System.out.println("1 - Informações sobre um vertice em específico;");
-            System.out.println("2 - Informações gerais sobre o grafo;");
-            System.out.println("3 - Relizar busca em profundidade;");
-            System.out.println("4 - Caminho minimo/Distância;");
-            System.out.println("5- Sair.");
 
-            opcao = in.nextInt();
-            
-            }
-        }
+        } while(flag);
     }
+}

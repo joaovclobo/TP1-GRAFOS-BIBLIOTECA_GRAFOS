@@ -12,10 +12,10 @@ Alunos responsáveis:
 
 package br.ufv.caf.BibliotecaGrafos;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Grafo {
 
@@ -28,8 +28,6 @@ public class Grafo {
     public ArrayList<Aresta> ArestasRetorno;
 
     /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
-
-    //TODO só precisam ser iniciadas nos metodos - João
 
     private double[][] L;
     private int[][] R;
@@ -73,7 +71,7 @@ public class Grafo {
                 }
             }
         }
-        
+
     }
 
     /*
@@ -230,7 +228,9 @@ public class Grafo {
     }
 
     public LinkedList<Integer> getVizinhos(int indVetice) {
-        return listaAdjacncia.get(indVetice - 1);
+        if (!listaAdjacncia.isEmpty()) {
+            return listaAdjacncia.get(indVetice - 1);
+        } else return null;
     }
 
     public int getGrau(int indVetice){
@@ -276,17 +276,21 @@ public class Grafo {
             addAresta(vertice1, vertice2, pesoAresta);
         }
 
-        //TODO Isso não precisa ficar junto da montagem do grafo - João
-
-
-
     }
 
     private void addVizinho(int indVertice, int indVizinho){
 
         listaAdjacncia.get(indVertice - 1).add(indVizinho);
 
-        Collections.sort(listaAdjacncia.get(indVertice -1));
+        Collections.sort(listaAdjacncia.get(indVertice - 1));
+
+    }
+
+    private void removeVizinho(int indVertice, int indVizinho){
+
+        listaAdjacncia.get(indVertice - 1).remove(new Integer(indVizinho));
+
+        Collections.sort(listaAdjacncia.get(indVertice - 1));
 
     }
 
@@ -302,11 +306,23 @@ public class Grafo {
 
     }
 
+    private void removeAresta(int indVertice1, int indVertice2, double peso, int indiceAresta) {
+
+        vertices.get(indVertice1 - 1).diminuiGrau();
+        vertices.get(indVertice2 - 1).diminuiGrau();
+
+        removeVizinho(indVertice1, indVertice2);
+        removeVizinho(indVertice2, indVertice1);
+
+        this.arestas.remove(indiceAresta);
+    }
+
     private void addVertice(int indice){
 
         Vertice vertice = new Vertice(indice);
-        this.vertices.add(vertice);
-
+        if (!vertices.contains(vertice)) {
+            this.vertices.add(vertice);
+        }
     }
 
     public void addVertices(int numeroVertices){
@@ -333,31 +349,31 @@ public class Grafo {
 
     }
 
-
-    public void BuscaProfundidade(int v){
-        for(Vertice vertice: vertices){
-            if(vertice.getIndice() == v){
+    public void BuscaProfundidade(int v) {
+        for (Vertice vertice : vertices) {
+            if (vertice.getIndice() == v) {
                 vertice.marcado = true;
                 OrdemBusca.add(vertice);
             }
         }
-        for(int w: this.getVizinhos(v)){
-            for(Vertice ver: vertices){
-                if(ver.getIndice() == w && ver.marcado == false){
-                    for(Aresta a: arestas){
-                        if((a.indVertice1 == v && a.indVertice2 == w)||(a.indVertice1 == w && a.indVertice2 == v)){
-                            a.explorada = true;
+        if (this.getVizinhos(v) != null){
+            for (int w : this.getVizinhos(v)) {
+                for (Vertice ver : vertices) {
+                    if (ver.getIndice() == w && ver.marcado == false) {
+                        for (Aresta a : arestas) {
+                            if ((a.indVertice1 == v && a.indVertice2 == w) || (a.indVertice1 == w && a.indVertice2 == v)) {
+                                a.explorada = true;
+                            }
                         }
-                    }
-                    ver.marcado = true;
-                    BuscaProfundidade(w);
-                }
-                else if (ver.getIndice() == w && ver.marcado == true){
-                    for(Aresta are: arestas){
-                        if((are.indVertice1 == v && are.indVertice2 == w)||(are.indVertice1 == w && are.indVertice2 == v)){
-                            if(are.explorada == false){
-                                are.explorada = true;
-                                ArestasRetorno.add(are);
+                        ver.marcado = true;
+                        BuscaProfundidade(w);
+                    } else if (ver.getIndice() == w && ver.marcado == true) {
+                        for (Aresta are : arestas) {
+                            if ((are.indVertice1 == v && are.indVertice2 == w) || (are.indVertice1 == w && are.indVertice2 == v)) {
+                                if (are.explorada == false) {
+                                    are.explorada = true;
+                                    ArestasRetorno.add(are);
+                                }
                             }
                         }
                     }
@@ -397,13 +413,62 @@ public class Grafo {
         this.centro.clear();
     }
 
+    //Se não há arestas de retorno o grafo não possui ciclo. A função retorna true casa haja ciclo e false caso contrário
     public boolean verificaCiclo(int v){
         BuscaProfundidade(v);
 
-        if(!this.ArestasRetorno.isEmpty()){
-            return true;
+        return !this.ArestasRetorno.isEmpty();
+    }
+
+    public void arvoreMinima() throws IOException {
+        double pesoTotal = 0;
+        Grafo arvoreMinima = new Grafo();
+        arvoreMinima.addVertices(this.vertices.size());
+
+        ArrayList<Aresta> arestasOrdenadas = (ArrayList<Aresta>) this.arestas.clone();
+        Collections.sort(arestasOrdenadas);
+
+        for (Aresta aresta : arestasOrdenadas) {
+            arvoreMinima.addAresta(aresta.indVertice1, aresta.indVertice2, aresta.peso);
+
+            if (aresta.equals(arestasOrdenadas.get(0))){
+                pesoTotal += aresta.peso;
+
+            } else {
+
+                if (arvoreMinima.verificaCiclo(aresta.indVertice1)) {
+                    arvoreMinima.removeAresta(aresta.indVertice1, aresta.indVertice2, aresta.peso, arvoreMinima.arestas.size() - 1);
+
+                } else {
+                    pesoTotal += aresta.peso;
+                    if (arvoreMinima.arestas.size() == arvoreMinima.vertices.size()-1){
+                        break;
+                    }
+                }
+            }
+            arvoreMinima.zeroingBuscaProfundidade();
+
+        }
+        System.out.println("\nPeso total da árvore mínima: " + pesoTotal);
+        System.out.printf("Árvore mínima que foi escrita no arquivo : ");
+        arvoreMinima.printGrafo();
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("\nDigite o endereço e o nome do arquivo de saída:");
+        String arqSaida = in.nextLine();
+        FileWriter fw = new FileWriter(arqSaida, false);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(String.valueOf(arvoreMinima.getOrdem()) + "\n");
+
+        for (Aresta arestas : arvoreMinima.arestas) {
+            bw.write(arestas.indVertice1 + " " + arestas.indVertice2 + " " + arestas.peso + "\n");
         }
 
-        return false;
+        bw.write("Peso total = " + pesoTotal);
+
+        bw.close();
+        fw.close();
     }
+
 }

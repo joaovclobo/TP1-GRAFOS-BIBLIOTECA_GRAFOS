@@ -37,9 +37,13 @@ public class Vertice {
     public int getIndice() {
         return indice;
     }
-    
+
     protected void aumentaGrau(){
         this.grau++;
+    }
+
+    protected void diminuiGrau(){
+        this.grau--;
     }
 
     @Override

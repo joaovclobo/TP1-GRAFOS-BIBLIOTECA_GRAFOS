@@ -18,12 +18,12 @@ Alunos responsáveis:
 
 package br.ufv.caf.BibliotecaGrafos;
 
-public class Aresta {
+public class Aresta implements Comparable<Aresta> {
     double peso;
     int indVertice1;
     int indVertice2;
     boolean explorada;
-    
+
     protected Aresta(int indVertice1, int indVertice2, double peso){
         this.peso = peso;
         this.indVertice1 = indVertice1;
@@ -34,5 +34,12 @@ public class Aresta {
     @Override
     public String toString() {
         return "Aresta: " + this.indVertice1 + "," + this.indVertice2 + " - Peso: " + this.peso;
+    }
+
+    @Override
+    public int compareTo(Aresta other) {
+        if (peso < other.peso) return -1;
+        if (peso > other.peso) return 1;
+        return 0;
     }
 }

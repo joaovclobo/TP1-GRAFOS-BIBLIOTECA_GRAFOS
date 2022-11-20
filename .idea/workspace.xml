@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="892a6fc0-44a2-4626-a10b-306c6948448e" name="Changes" comment="Mudanca da representacao para lista de adjascencia">
+    <list default="true" id="892a6fc0-44a2-4626-a10b-306c6948448e" name="Changes" comment="Criação função de arvore minima">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConversaoJson/ConversorJson/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ConversaoJson/ConversorJson/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Aresta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Grafo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufv/caf/BibliotecaGrafos/Vertice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +29,8 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -41,6 +48,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/joao/Documents/UFV/CCF 331 - GRAFOS/TP1/Entrega/BibliotecaGrafos",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -111,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666476659374</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Mudança no tipo de dado do peso da aresta na leitura de arquivo">
+      <created>1666477092422</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666477092422</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,6 +146,8 @@
     <MESSAGE value="Criação do &quot;esqueleto&quot; e das primeiras funções" />
     <MESSAGE value="Fim da criação das funções basicas" />
     <MESSAGE value="Mudanca da representacao para lista de adjascencia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mudanca da representacao para lista de adjascencia" />
+    <MESSAGE value="Mudança no tipo de dado do peso da aresta na leitura de arquivo" />
+    <MESSAGE value="Criação função de arvore minima" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criação função de arvore minima" />
   </component>
 </project>
