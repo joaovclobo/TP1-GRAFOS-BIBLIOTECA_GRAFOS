@@ -18,7 +18,7 @@ Alunos responsáveis:
 
 package br.ufv.caf.BibliotecaGrafos;
 
-public class Vertice {
+public class Vertice implements Comparable<Vertice>{
 
     private int indice;
     private int grau;
@@ -49,5 +49,14 @@ public class Vertice {
     @Override
     public String toString(){
         return "Vertice: " + this.indice + " - Grau: " + this.grau;
+    }
+    
+    @Override
+    public int compareTo(Vertice other) {
+        if (grau > other.grau) return -1;
+        if (grau < other.grau) return 1;
+        if (indice >other.indice) return -1;
+        if (indice < other.indice) return 1;
+        return 0;
     }
 }

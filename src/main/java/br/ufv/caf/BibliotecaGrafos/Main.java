@@ -70,6 +70,7 @@ public class Main {
                     System.out.printf("Centro: ");
                     grafo.getCentro();
                     grafo.zeroingCentro();
+                    grafo.coberturaMinima();
                     break;
                 case 3:
                     System.out.println("Qual o vertice escolhido para a busca:");

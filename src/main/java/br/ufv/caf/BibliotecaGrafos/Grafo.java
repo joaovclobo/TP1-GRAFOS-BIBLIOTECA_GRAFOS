@@ -26,6 +26,9 @@ public class Grafo {
     private ArrayList<Vertice> centro;
     public ArrayList<Vertice> OrdemBusca;
     public ArrayList<Aresta> ArestasRetorno;
+    
+    private ArrayList<Vertice> coberturaMinima;
+    private int numCobertura;
 
     /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
 
@@ -39,6 +42,7 @@ public class Grafo {
         centro = new ArrayList<>();
         OrdemBusca = new ArrayList<>();
         ArestasRetorno = new ArrayList<>();
+        coberturaMinima = new ArrayList<>();
     }
 
     /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
@@ -469,6 +473,81 @@ public class Grafo {
 
         bw.close();
         fw.close();
+    }
+    
+    
+    public void coberturaMinima(){
+        
+        Vertice verticeUtilizado = null;
+        
+        ArrayList<Vertice> verticesOrdenados = (ArrayList<Vertice>) 
+                this.vertices.clone();
+        ArrayList<Aresta> arestasCobertura = (ArrayList<Aresta>) 
+                this.arestas.clone();
+        
+        ArrayList<Aresta> vetorAuxiliar = new ArrayList<>();
+        
+        
+        Collections.sort(verticesOrdenados);
+        this.numCobertura = 0;
+        // /home/douglas/Desktop/grafo2
+        
+        while(!arestasCobertura.isEmpty()){
+           
+            if(!verticesOrdenados.isEmpty()){
+                verticeUtilizado = verticesOrdenados.get(0);
+                verticesOrdenados.remove(0);
+                
+            }
+            
+            this.coberturaMinima.add(verticeUtilizado);
+            
+            
+            for(int i = 0; i < arestasCobertura.size(); i++){
+                if(arestasCobertura.get(i).indVertice1 == verticeUtilizado.getIndice()){
+                    if(!vetorAuxiliar.contains(arestasCobertura.get(i))){
+                        vetorAuxiliar.add(arestasCobertura.get(i));
+                    }
+                }else if(arestasCobertura.get(i).indVertice2 == verticeUtilizado.getIndice()){
+                    if(!vetorAuxiliar.contains(arestasCobertura.get(i))){
+                        vetorAuxiliar.add(arestasCobertura.get(i));
+                    }
+                }
+            }
+            
+            if(vetorAuxiliar.size() == getTamanho()){
+                for(int i = 0; i < vetorAuxiliar.size(); i++){
+                    if(!arestasCobertura.isEmpty()){
+                        arestasCobertura.remove(vetorAuxiliar.get(i));
+                    }else{
+                        break;
+                    }
+                }
+        }/*
+            contadorAux++;
+            for(int i = 0;i <vetorAuxiliar.size();i++){
+                System.out.println(vetorAuxiliar.get(i));
+            }
+            if(contadorAux == vetorAuxiliar.size()){
+                for(int i = 0; i < contadorAux; i++){
+                    if(!arestasCobertura.isEmpty()){
+                        arestasCobertura.remove(vetorAuxiliar.get(i));
+                        
+                    }else{
+                        break;
+                    }
+                }
+            }*/
+            this.numCobertura = this.coberturaMinima.size();
+        }
+        
+        
+        System.out.println("Cobertura minima:");
+        for(int i = 0; i < this.coberturaMinima.size();i++){
+            System.out.println(this.coberturaMinima.get(i)); 
+        }
+        
+        System.out.println("Numero Cobertura:"+this.numCobertura);
     }
 
 }
