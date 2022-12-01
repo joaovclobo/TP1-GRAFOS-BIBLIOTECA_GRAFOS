@@ -28,7 +28,8 @@ public class Grafo {
     public ArrayList<Aresta> ArestasRetorno;
     
     private ArrayList<Vertice> coberturaMinima;
-    private int numCobertura;
+    
+    private ArrayList<Aresta> emparelhamentoMax;
 
     /********************* Estruturas para o algoritmo de caminho mínimo: Dijkstra *********************/
 
@@ -43,6 +44,7 @@ public class Grafo {
         OrdemBusca = new ArrayList<>();
         ArestasRetorno = new ArrayList<>();
         coberturaMinima = new ArrayList<>();
+        emparelhamentoMax = new ArrayList<>();
     }
 
     /********************* Funções pertinentes do algoritmo Floyd-Warshall *********************/
@@ -417,7 +419,8 @@ public class Grafo {
         this.centro.clear();
     }
 
-    //Se não há arestas de retorno o grafo não possui ciclo. A função retorna true casa haja ciclo e false caso contrário
+    //Se não há arestas de retorno o grafo não possui ciclo.
+    //A função retorna true casa haja ciclo e false caso contrário
     public boolean verificaCiclo(int v){
         BuscaProfundidade(v);
 
@@ -489,7 +492,6 @@ public class Grafo {
         
         
         Collections.sort(verticesOrdenados);
-        this.numCobertura = 0;
         // /home/douglas/Desktop/grafo2
         
         while(!arestasCobertura.isEmpty()){
@@ -518,36 +520,92 @@ public class Grafo {
             if(vetorAuxiliar.size() == getTamanho()){
                 for(int i = 0; i < vetorAuxiliar.size(); i++){
                     if(!arestasCobertura.isEmpty()){
-                        arestasCobertura.remove(vetorAuxiliar.get(i));
+                        arestasCobertura.remove(vetorAuxiliar.get(i));  
                     }else{
                         break;
                     }
                 }
-        }/*
-            contadorAux++;
-            for(int i = 0;i <vetorAuxiliar.size();i++){
-                System.out.println(vetorAuxiliar.get(i));
             }
-            if(contadorAux == vetorAuxiliar.size()){
-                for(int i = 0; i < contadorAux; i++){
-                    if(!arestasCobertura.isEmpty()){
-                        arestasCobertura.remove(vetorAuxiliar.get(i));
-                        
-                    }else{
-                        break;
-                    }
-                }
-            }*/
-            this.numCobertura = this.coberturaMinima.size();
         }
         
         
-        System.out.println("Cobertura minima:");
+        System.out.println("Cobertura minima:\n");
         for(int i = 0; i < this.coberturaMinima.size();i++){
             System.out.println(this.coberturaMinima.get(i)); 
         }
+        System.out.println("");
+        System.out.println("Numero Cobertura:"+this.coberturaMinima.size());
+    }
+ 
+    
+    
+    public boolean caminhoAumentante(){
         
-        System.out.println("Numero Cobertura:"+this.numCobertura);
+        for(int i = 0;i < arestas.size();i++){
+            if(arestas.get(i).emparelhada == true){
+                vertices.get(arestas.get(i).indVertice1).saturado = false;
+                vertices.get(arestas.get(i).indVertice2).saturado = false;
+                arestas.get(i).emparelhada = false;
+                
+                if(vertices.get(arestas.get(i+1).indVertice1).getIndice() == arestas.get(i+1).indVertice1 || 
+                    vertices.get(arestas.get(i+1).indVertice1).getIndice() == arestas.get(i+1).indVertice2 ){
+                        vertices.get(arestas.get(i+1).indVertice1).saturado =  true;
+                        
+                }else if(vertices.get(arestas.get(i+1).indVertice2).getIndice() == arestas.get(i+1).indVertice2 || 
+                    vertices.get(arestas.get(i+1).indVertice2).getIndice() == arestas.get(i+1).indVertice1 ){
+                        vertices.get(arestas.get(i+1).indVertice2).saturado =  true;
+                    
+                }else{
+                    
+                    vertices.get(arestas.get(i).indVertice1).saturado = true;
+                    vertices.get(arestas.get(i).indVertice2).saturado = true;
+                    arestas.get(i).emparelhada = true;
+                }
+                
+                if(vertices.get(arestas.get(i+1).indVertice1).saturado ==  true &&
+                        vertices.get(arestas.get(i+1).indVertice2).saturado == true){
+                    arestas.get(i+1).emparelhada = true;
+                }
+                
+                for(Vertice v: vertices){
+                    if(v.getIndice() == arestas.get(i).indVertice1 || 
+                            v.getIndice() == arestas.get(i).indVertice2){
+                        v.saturado =  true;
+                    }
+                }
+            }
+            
+        }
+        return false;
+    }
+    
+    
+    public void EmparelhamentoMax(){
+        
+        for(Aresta a: arestas){
+            if(a.emparelhada == false){
+                if(vertices.get(a.indVertice1).saturado == false ||
+                        vertices.get(a.indVertice2).saturado == false){
+                    emparelhamentoMax.add(a);
+                    a.emparelhada = true;
+                    for(Vertice v: vertices){
+                        if(v.getIndice() == a.indVertice1 || v.getIndice() == a.indVertice2){
+                            v.saturado =  true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        for (Aresta aresta: arestas) {
+            if(aresta.emparelhada == true){
+                System.out.println(aresta);
+                
+            }
+        }
+
     }
 
+
 }
+

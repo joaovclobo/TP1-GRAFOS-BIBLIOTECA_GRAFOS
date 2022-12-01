@@ -23,12 +23,14 @@ public class Aresta implements Comparable<Aresta> {
     int indVertice1;
     int indVertice2;
     boolean explorada;
+    boolean emparelhada;
 
     protected Aresta(int indVertice1, int indVertice2, double peso){
         this.peso = peso;
         this.indVertice1 = indVertice1;
         this.indVertice2 = indVertice2;
         this.explorada = false;
+        this.emparelhada = false;
     }
 
     @Override

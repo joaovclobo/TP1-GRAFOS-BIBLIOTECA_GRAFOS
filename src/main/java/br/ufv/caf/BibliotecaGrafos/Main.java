@@ -1,4 +1,4 @@
-/*
+    /*
 Universidade Federal De Viçosa - Campus Florestal
 Trabalho prático 1 - Disciplina CCF 331 - TEORIA E MODELO DE GRAFOS
 Professor responsável:
@@ -71,6 +71,13 @@ public class Main {
                     grafo.getCentro();
                     grafo.zeroingCentro();
                     grafo.coberturaMinima();
+                    System.out.println("");
+                    boolean temCiclo = grafo.verificaCiclo(1);
+                    if(!temCiclo){
+                        System.out.println("O grafo tem ciclo.");
+                    }else{
+                        System.out.println("O grafo não tem ciclo.");
+                    }
                     break;
                 case 3:
                     System.out.println("Qual o vertice escolhido para a busca:");

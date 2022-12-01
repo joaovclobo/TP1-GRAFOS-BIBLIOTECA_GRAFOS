@@ -23,11 +23,13 @@ public class Vertice implements Comparable<Vertice>{
     private int indice;
     private int grau;
     boolean marcado;
+    boolean saturado;
 
     protected Vertice(int indice) {
         this.indice = indice;
         this.grau = 0;
         this.marcado = false;
+        this.saturado = false;
     }
 
     protected int getGrau() {
